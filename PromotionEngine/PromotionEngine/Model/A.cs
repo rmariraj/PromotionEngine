@@ -2,16 +2,12 @@
 {
     public class A : Product
     {
-
-        public long APrice { get; set; }
-        public long APromotionAmount { get; set; }
-        public long APromotionUnit { get; set; }
-        public long AAmount { get; set; }
         public A()
         {
-            this.APrice = 50;
-            this.APromotionAmount = 130;
-            this.APromotionUnit = 3;
+            ProductName = "A";
+            Price = 50;
+            PromotionAmount = 130;
+            PromotionUnit = 3;
         }
     }
 }

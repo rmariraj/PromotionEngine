@@ -4,30 +4,19 @@ using System;
 namespace PromotionEngine.Products
 {
     public class DDetails : ProductDetails
-    { 
-        Product product;
-        public DDetails(Product product) : base(product)
-        { 
-            this.product = product;
-            this.product.D = new D();
-            product.D.TotalUnit = GetUnit();
-            product.D.DAmount = CalculateADetails(product.D.TotalUnit);
+    {
+        public DDetails()
+        {
+            this.product = new D();
         }
 
-        private static long GetUnit()
-        {
-            Console.WriteLine("Enter the unit for D");
-            string sUnit = Console.ReadLine();
-            long totalUnit = !String.IsNullOrEmpty(sUnit) ? Convert.ToInt64(sUnit) : 0;
-            return totalUnit;
-        }
-
-        private long CalculateADetails(long totalUnit)
-        {
-            long Damount = 0;
-            long DnormalUnit = totalUnit % product.D.DPromotionUnit;
-            Damount = (totalUnit / product.D.DPromotionUnit) * product.D.DPromotionAmount;
-            return Damount + (DnormalUnit * product.D.DPrice);
-        }
+        //public override Product CalculateDetails()
+        //{ 
+        //    long Aamount = 0;
+        //    long AnormalUnit = product.TotalUnit % product.PromotionUnit;
+        //    Aamount = (product.TotalUnit / product.PromotionUnit) * product.PromotionAmount;
+        //    product.Amount = Aamount + (AnormalUnit * product.Price);
+        //    return product;
+        //} 
     }
 }

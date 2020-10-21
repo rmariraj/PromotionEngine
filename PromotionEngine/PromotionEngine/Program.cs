@@ -9,17 +9,18 @@ namespace PromotionEngine
     {
         public static void Main(string[] args)
         {
-            long TotalPrice = 0;
             Product product = new Product();
-            ProductBuilder productBuilder = new ProductBuilder();
-            ProductDetails productDetails = new ProductDetails(product);
+            ProductBuilder<Product> productBuilder = new ProductBuilder<Product>();
+            //ProductDetails productDetails;// = new ProductDetails(product);
             Console.WriteLine("Enter Total number of order");
             int TotalOrders = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < TotalOrders; i++)
             {
-                ProductBuilder.Builder(productDetails, product);
-                TotalPrice = productDetails.GetTotal();
-                Console.WriteLine(TotalPrice);
+                productBuilder.Builder("A");
+                productBuilder.Builder("B");
+                productBuilder.Builder("C");
+                productBuilder.Builder("D");
+                Console.WriteLine(productBuilder.GetTotalPrice());
             }
             Console.ReadLine();
         }

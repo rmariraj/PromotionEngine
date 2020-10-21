@@ -1,21 +1,31 @@
-﻿namespace PromotionEngine.Products
-{
-    public class ProductDetails
-    {
-        Model.Product product;
-        public ProductDetails()
-        {
+﻿using PromotionEngine.Model;
+using System;
 
-        }
-        public ProductDetails(Model.Product p)
+namespace PromotionEngine.Products
+{
+    public abstract class ProductDetails
+    {
+        public Product product;
+        public Cart Cart;
+        public Product GetUnit(string className)
         {
-            product = p;
+            Console.WriteLine("Enter the unit for {0}", className);
+            string sUnit = Console.ReadLine();
+            long totalUnit = !String.IsNullOrEmpty(sUnit) ? Convert.ToInt64(sUnit) : 0;
+            product.Unit = totalUnit;
+            return product;
         }
         public long GetTotal()
         {
-            return product.A.AAmount + product.B.BAmount +
-               ((product.C.CAmount > 0 && product.C.CAmount == product.D.DAmount) ? 0 : product.C.CPrice * product.C.TotalUnit) +
-              ((product.C.CAmount > 0 && product.C.CAmount == product.D.DAmount) ? product.D.DAmount : product.D.DPrice * product.D.TotalUnit);
+            return product.Amount;
+        }
+        public virtual Product CalculateDetails()
+        {
+            long Aamount = 0;
+            long AnormalUnit = product.Unit % product.PromotionUnit;
+            Aamount = (product.Unit / product.PromotionUnit) * product.PromotionAmount;
+            product.Amount = Aamount + (AnormalUnit * product.Price);
+            return product;
         }
     }
 }

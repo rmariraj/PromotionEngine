@@ -46,6 +46,7 @@
     <Compile Include="Model\A.cs" />
     <Compile Include="Model\B.cs" />
     <Compile Include="Model\C.cs" />
+    <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\D.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="ProductBuilder.cs" />

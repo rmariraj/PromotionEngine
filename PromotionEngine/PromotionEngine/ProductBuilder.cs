@@ -1,30 +1,53 @@
 ﻿using PromotionEngine.Model;
 using PromotionEngine.Products;
+using System.Linq;
 
 namespace PromotionEngine
 {
-    class ProductBuilder
+    class ProductBuilder<T> where T : Product
     {
-        public static void Builder(ProductDetails productDetails, Product product)
+        Cart Cart = null;
+        long TotalPrice = 0;
+        ProductDetails productDetails = null;
+        public ProductBuilder()
         {
-            CreateObject("A", product);
-            CreateObject("B", product);
-            CreateObject("C", product);
-            CreateObject("D", product);
+            Cart = new Cart();
+        }
+        public long GetTotalPrice()
+        {
+            var CProduct = Cart.product.Where(x => x.ProductName == "C").FirstOrDefault();
+            var DProduct = Cart.product.Where(x => x.ProductName == "D").FirstOrDefault();
+
+            Cart.product.Where(x => x.ProductName == "C" && x.Unit > 0)
+                .Select(w => w.Amount = (CProduct.Amount == DProduct.Amount ? 0 : w.Price * w.Unit)).ToList();
+
+            Cart.product.Where(x => x.ProductName == "D" && x.Unit > 0)
+              .Select(w => w.Amount = (CProduct.Amount == DProduct.Amount ? w.PromotionAmount * w.Unit : w.Price * w.Unit)).ToList();
+
+            TotalPrice = Cart.product.Sum(x => x.Amount);
+
+            return TotalPrice;
+        }
+        public void Builder(string ProductName)
+        {
+            productDetails = CreateObject(ProductName);
+            productDetails.GetUnit(ProductName);
+            var obj = productDetails.CalculateDetails();
+            Cart.product.Add(obj);
         }
 
-        private static ProductDetails CreateObject(string ProductName, Product p)
+        private ProductDetails CreateObject(string ProductName)
         {
             switch (ProductName)
             {
                 case "A":
-                    return new ADetails(p);
+                    return new ADetails();
                 case "B":
-                    return new BDetails(p);
+                    return new BDetails();
                 case "C":
-                    return new CDetails(p);
+                    return new CDetails();
                 case "D":
-                    return new DDetails(p);
+                    return new DDetails();
                 default:
                     break;
             }

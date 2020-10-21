@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace PromotionEngine.Model
 {
-    public class D : Product
-    { 
-        public D()
+    public class Cart
+    {
+        public List<Product> product { get; set; }
+        public Cart()
         {
-            ProductName = "D";
-            Price = 15;
-            PromotionAmount = 30;
-            PromotionUnit = 1;
+            product = new List<Product>();
         }
     }
 }

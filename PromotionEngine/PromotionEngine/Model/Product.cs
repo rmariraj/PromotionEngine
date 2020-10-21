@@ -8,10 +8,11 @@ namespace PromotionEngine.Model
 {
     public class Product
     {
-        public long TotalUnit { get; set; }
-        public virtual A A { get; set; }
-        public virtual B B { get; set; }
-        public virtual C C { get; set; }
-        public virtual D D { get; set; }
+        public string ProductName { get; set; }
+        public long Unit { get; set; }
+        public long Price { get; set; }
+        public long PromotionAmount { get; set; }
+        public long PromotionUnit { get; set; }
+        public long Amount { get; set; }
     }
 }
