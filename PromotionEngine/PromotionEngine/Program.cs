@@ -10,7 +10,7 @@ namespace PromotionEngine
         public static void Main(string[] args)
         {
             Product product = new Product();
-            ProductBuilder<Product> productBuilder = new ProductBuilder<Product>();
+            ProductBuilder productBuilder = new ProductBuilder();
             //ProductDetails productDetails;// = new ProductDetails(product);
             Console.WriteLine("Enter Total number of order");
             int TotalOrders = Convert.ToInt32(Console.ReadLine());

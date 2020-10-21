@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PromotionEngine
 {
-    class ProductBuilder<T> where T : Product
+    class ProductBuilder : Product
     {
         Cart Cart = null;
         long TotalPrice = 0;
@@ -19,10 +19,10 @@ namespace PromotionEngine
             var DProduct = Cart.product.Where(x => x.ProductName == "D").FirstOrDefault();
 
             Cart.product.Where(x => x.ProductName == "C" && x.Unit > 0)
-                .Select(w => w.Amount = (CProduct.Amount == DProduct.Amount ? 0 : w.Price * w.Unit)).ToList();
+                .Select(w => w.Amount = (CProduct.Unit == DProduct.Unit ? 0 : w.Price * w.Unit)).ToList();
 
             Cart.product.Where(x => x.ProductName == "D" && x.Unit > 0)
-              .Select(w => w.Amount = (CProduct.Amount == DProduct.Amount ? w.PromotionAmount * w.Unit : w.Price * w.Unit)).ToList();
+              .Select(w => w.Amount = (CProduct.Unit == DProduct.Unit ? w.PromotionAmount * w.Unit : w.Price * w.Unit)).ToList();
 
             TotalPrice = Cart.product.Sum(x => x.Amount);
 
